@@ -1,3 +1,19 @@
-# rhds
+# Reproducible health data science short course
 
-This repository is showing progress through the University of Bristol Medical School's Short Course entitled "Reproducible Health Data Science". It is using real data but in a non-novel way, and should really be treated as a test environment. Please do not assume any code written here is accurate or scientifically interesting!
+This repository contains the code for the short course practical sessions. 
+
+## Setup instructions
+
+Use Conda / Mamba to create an R environment and then install the R packages from the installation script.
+
+```
+mamba env create -f environment.yml
+Rscript install.r
+```
+
+## To run
+
+```
+bash download-data.sh
+Rscript download-pan-cancer-clinical.r
+```
