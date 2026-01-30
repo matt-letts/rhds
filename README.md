@@ -17,3 +17,7 @@ Rscript install.r
 bash download-data.sh
 Rscript download-pan-cancer-clinical.r
 ```
+
+## Directory set-up
+
+Directory information in config-template.env file
