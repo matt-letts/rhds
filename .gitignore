@@ -1,4 +1,5 @@
 *.zip
 *.tar.gz
 *.xlsx
+*.pdf
 config.env
