@@ -2,11 +2,7 @@
 ## predict-proteins.r
 ## -------------------------------------------- ##
 library(meffonym)
-
-my.write.table <- function(x, filename) {
-    cat("saving", basename(filename), "...\n")
-    write.table(x, file = filename, row.names = T, col.names = T, sep = "\t")
-}
+library(rhds.rpackage)
 
 args <- commandArgs(trailingOnly = T)
 datadir <- args[1]

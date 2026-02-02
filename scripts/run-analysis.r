@@ -6,27 +6,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 datadir <- args[1]
 resultsdir <- args[2]
-
-## function for extracting tcga tar.gz's to named output
-extract.file <- function(tar.file, extract.file, new.file, resultsdir) {
-  # get file path to extracted file
-  x.file <-
-    grep(extract.file,
-      untar(tar.file, list = T),
-      value = T
-    )
-
-  # extract the tar file
-  cat("Extracting", tar.file, "to", new.file, "\n")
-  untar(tar.file, exdir = resultsdir, extras = "--no-same-owner")
-  x.file <- file.path(resultsdir, x.file)
-
-  # move the data to named output
-  file.copy(x.file, new.file)
-
-  # remove untared directory
-  unlink(dirname(x.file), recursive = TRUE)
-}
+library(rhds.rpackage)
 
 #######################
 ## extract the clinical data
@@ -167,11 +147,6 @@ write.table(clinical, file = output.filename, row.names = F, col.names = T, sep 
 ## -------------------------------------------- ##
 library(meffonym)
 
-my.write.table <- function(x, filename) {
-  cat("saving", basename(filename), "...\n")
-  write.table(x, file = filename, row.names = T, col.names = T, sep = "\t")
-}
-
 args <- commandArgs(trailingOnly = T)
 datadir <- args[1]
 resultsdir <- args[2]
@@ -231,11 +206,6 @@ args <- commandArgs(trailingOnly = T)
 datadir <- args[1]
 resultsdir <- args[2]
 
-my.write.table <- function(x, filename) {
-  cat("saving", basename(filename), "...\n")
-  write.table(x, file = filename, row.names = T, col.names = T, sep = "\t")
-}
-
 ## The format of sample identifiers/barcodes is described here:
 ## https://docs.gdc.cancer.gov/Encyclopedia/pages/TCGA_Barcode/
 ##
@@ -253,14 +223,6 @@ my.write.table <- function(x, filename) {
 ##
 ## The following function extracts the participant identifier
 ## from a sample id/barcode.
-
-extract.participant <- function(id) {
-  sub("TCGA-[^-]+-([^-]+)-.*", "\\1", id)
-}
-
-extract.tissue <- function(id) {
-  sub("TCGA-[^-]+-[^-]+-([0-9]+)[^-]+-.*", "\\1", id)
-}
 
 pred.protein.filename <- file.path(resultsdir, "predicted-proteins.txt")
 clinical.filename <- file.path(resultsdir, "clinical-clean.txt")
