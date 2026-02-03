@@ -11,13 +11,31 @@ mamba env create -f environment.yml
 Rscript install.r
 ```
 
+Next create a `config.env` file based on the `config-template.env` template.
+
 ## To run
 
+You can run the entire pipeline using 
+
 ```
-bash download-data.sh
-Rscript download-pan-cancer-clinical.r
+bash run-all.sh
 ```
 
-## Directory set-up
+Note, to run within a container, first create an image file (`rhds-tcga-r.sif`) from the definition file (`rhds-tcga-r.def`):
 
-Directory information in config-template.env file
+```
+apptainer build rhds-tcga-r.sif rhds-tcga-r.def
+```
+
+Then use it to run the scripts e.g.
+
+```
+source config.env
+mkdir -p ${datadir} ${resultsdir} ${docsdir}
+apptainer run \
+    --fakeroot \
+    -B $(pwd) \
+    -B ${datadir} -B ${resultsdir} -B ${docsdir} \
+    rhds-tcga-r.sif \
+    bash run-all.sh
+```
