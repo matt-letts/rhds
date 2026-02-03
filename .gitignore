@@ -1,12 +1,27 @@
+# Archives
 *.zip
 *.tar.gz
 *.xlsx
+
+# Environment/editor
 config.env
 .vscode
+
+# Analysis outputs
 analysis_cache
 analysis_files
 /Rplots.pdf
-rhds-tcga-r.sif
-.snakemake
-.cache
-.ipython
+
+# Containers
+*.sif
+
+# Snakemaker
+.snakemake/
+.cache/
+
+# Python
+__pycache__/
+.ipython/
+
+# Quarto / misc
+.quarto/
