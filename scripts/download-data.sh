@@ -1,8 +1,9 @@
 #!/bin/bash
 
-set -e
+set -e ## exit immediately if a command exits with a non-zero status
 
-source config.env
+datadir=$1
+resultsdir=$2
 
 mkdir -p $datadir
 mkdir -p $resultsdir
