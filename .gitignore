@@ -5,4 +5,5 @@ config.env
 .vscode
 analysis_cache
 analysis_files
-/Rplots.pdfrhds-tcga-r.sif
+/Rplots.pdf
+rhds-tcga-r.sif
