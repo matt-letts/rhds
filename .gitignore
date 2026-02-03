@@ -1,8 +1,8 @@
 *.zip
 *.tar.gz
 *.xlsx
-*.pdf
 config.env
 .vscode
 analysis_cache
 analysis_files
+/Rplots.pdf
