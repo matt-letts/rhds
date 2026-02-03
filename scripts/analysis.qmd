@@ -23,7 +23,7 @@ library(meffonym)
 library(here)
 
 # Read environment file
-readRenviron(here("scripts/config.env"))
+readRenviron(here("config.env"))
 
 datadir <- Sys.getenv("datadir")
 resultsdir <- Sys.getenv("resultsdir")
