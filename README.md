@@ -1,7 +1,6 @@
 # Reproducible health data science short course
 
 This repository contains the code for the short course practical sessions. 
-I have updated the readme to reflect the fact that we were working with a new branch, but then merged it
 
 ## Setup instructions
 
@@ -39,4 +38,15 @@ apptainer run \
     -B ${datadir} -B ${resultsdir} -B ${docsdir} \
     rhds-tcga-r.sif \
     bash run-all.sh
+```
+
+## Snakemake pipeline
+
+```
+source config.env
+mkdir -p ${docsdir} ${resultsdir} ${datadir}
+snakemake \
+    --cores 1 \
+    --use-apptainer \
+    --apptainer-args "--fakeroot -B ${datadir} -B ${resultsdir} -B ${docsdir} -B $(pwd)"
 ```
