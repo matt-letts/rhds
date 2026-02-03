@@ -1,0 +1,112 @@
+Assuming unrestricted shared filesystem usage.
+host: ip-10-0-21-238
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+analysis                1
+clean_clinical          1
+combine_data            1
+extract_data            1
+initial_analysis        1
+predict_proteins        1
+total                   7
+
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb  3 14:28:25 2026]
+localrule predict_proteins:
+    input: /data/user20/rhds/data/methylation-clean-score-sites.csv.gz
+    output: /data/user20/rhds/results/predicted-proteins.txt
+    log: /data/user20/rhds/results/logs/predict-proteins.log
+    jobid: 7
+    reason: Software environment definition has changed since last execution
+    resources: tmpdir=/tmp
+Activating singularity image rhds-tcga-r.sif
+Select jobs to execute...
+[Tue Feb  3 14:28:46 2026]
+Finished jobid: 7 (Rule: predict_proteins)
+1 of 7 steps (14%) done
+Execute 1 jobs...
+[Tue Feb  3 14:28:46 2026]
+localrule extract_data:
+    input: /data/user20/rhds/results/md5sums.txt
+    output: /data/user20/rhds/results/clinical.txt, /data/user20/rhds/results/protein-clean.txt
+    log: /data/user20/rhds/results/logs/extract-data.log
+    jobid: 5
+    reason: Software environment definition has changed since last execution
+    resources: tmpdir=/tmp
+Activating singularity image rhds-tcga-r.sif
+[Tue Feb  3 14:28:50 2026]
+Finished jobid: 5 (Rule: extract_data)
+2 of 7 steps (29%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb  3 14:28:50 2026]
+localrule clean_clinical:
+    input: /data/user20/rhds/results/clinical.txt, /data/user20/rhds/results/TCGA-CDR-SupplementalTableS1.txt
+    output: /data/user20/rhds/results/clinical-clean.txt
+    log: /data/user20/rhds/results/logs/clean-clinical.log
+    jobid: 4
+    reason: Input files updated by another job: /data/user20/rhds/results/clinical.txt
+    resources: tmpdir=/tmp
+Activating singularity image rhds-tcga-r.sif
+[Tue Feb  3 14:28:53 2026]
+Finished jobid: 4 (Rule: clean_clinical)
+3 of 7 steps (43%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb  3 14:28:53 2026]
+localrule combine_data:
+    input: /data/user20/rhds/results/clinical-clean.txt, /data/user20/rhds/results/predicted-proteins.txt
+    output: /data/user20/rhds/results/combined-clin-pred-proteins.txt
+    log: /data/user20/rhds/results/logs/combine-data.log
+    jobid: 3
+    reason: Input files updated by another job: /data/user20/rhds/results/predicted-proteins.txt, /data/user20/rhds/results/clinical-clean.txt
+    resources: tmpdir=/tmp
+Activating singularity image rhds-tcga-r.sif
+[Tue Feb  3 14:28:55 2026]
+Finished jobid: 3 (Rule: combine_data)
+4 of 7 steps (57%) done
+Select jobs to execute...
+Execute 2 jobs...
+[Tue Feb  3 14:28:55 2026]
+localrule analysis:
+    input: /data/user20/rhds/results/combined-clin-pred-proteins.txt
+    output: /data/user20/rhds/docs/analysis.html
+    log: /data/user20/rhds/results/logs/analysis.log
+    jobid: 2
+    reason: Input files updated by another job: /data/user20/rhds/results/combined-clin-pred-proteins.txt
+    resources: tmpdir=/tmp
+Activating singularity image rhds-tcga-r.sif
+[Tue Feb  3 14:28:55 2026]
+localrule initial_analysis:
+    input: /data/user20/rhds/results/combined-clin-pred-proteins.txt, scripts/initial-analysis.ipynb
+    output: /data/user20/rhds/docs/initial-analysis.html
+    log: /data/user20/rhds/results/logs/analysis.log
+    jobid: 8
+    reason: Input files updated by another job: /data/user20/rhds/results/combined-clin-pred-proteins.txt
+    resources: tmpdir=/tmp
+Activating singularity image rhds-tcga-r.sif
+[Tue Feb  3 14:29:40 2026]
+Finished jobid: 2 (Rule: analysis)
+5 of 7 steps (71%) done
+[Tue Feb  3 14:29:43 2026]
+Finished jobid: 8 (Rule: initial_analysis)
+6 of 7 steps (86%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb  3 14:29:43 2026]
+localrule all:
+    input: /data/user20/rhds/results/md5sums.txt, /data/user20/rhds/docs/analysis.html, /data/user20/rhds/docs/initial-analysis.html
+    jobid: 0
+    reason: Input files updated by another job: /data/user20/rhds/docs/analysis.html, /data/user20/rhds/docs/initial-analysis.html
+    resources: tmpdir=/tmp
+[Tue Feb  3 14:29:43 2026]
+Finished jobid: 0 (Rule: all)
+7 of 7 steps (100%) done
+Complete log(s): /users/home/user20/repo/rhds/.snakemake/log/2026-02-03T142824.127552.snakemake.log
