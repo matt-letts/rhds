@@ -7,3 +7,6 @@ analysis_cache
 analysis_files
 /Rplots.pdf
 rhds-tcga-r.sif
+.snakemake
+.cache
+.ipython
